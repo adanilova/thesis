@@ -1,0 +1,16 @@
+# Run VRPwTW
+
+
+
+option solver cplexamp;
+
+model VRPwTW.mod;
+
+data VRPwTW.dat;
+option omit_zero_rows 1;
+
+solve;
+
+display Travel_Cost > VRPwTW.sol;
+display X> VRPwTW.sol;
+display Visit > VRPwTW.sol;
