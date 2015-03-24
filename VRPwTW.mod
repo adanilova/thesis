@@ -11,8 +11,8 @@ set VEHICLES;
 
 # PARAMETRS
 
-param demand {NODE} >=0;							# demand at node i
-param capacity{VEHICLES} >=0; 				# capacity on vehicle
+param demand {NODE} >= 0;							# demand at node i
+param capacity{VEHICLES} >= 0; 				# capacity on vehicle
 param travel_distance {ARC} >= 0;			# travel distance between nodes i and j
 
 # TIME
