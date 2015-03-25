@@ -9,7 +9,7 @@
 require 'csv'
 
 cs = %w[
-  MoscowDepot Kostroma_ASHAN Yaroslavl_LENTA Yaroslavl_7Continent Yaroslavl_ATAK Yaroslavl_ASHANn Yaroslavl_ASHANp Yaroslavl_LENTA
+  MoscowDepot Yaroslavl_LENTA1 Yaroslavl_7Continent Yaroslavl_ATAK Yaroslavl_ASHANn Yaroslavl_ASHANp Yaroslavl_LENTA
   Yaroslavl_Giperglobus Yaroslavl_Magnit Kostroma_ASHAN Kostroma_7Continent MoscowDepotEND
 ]
 

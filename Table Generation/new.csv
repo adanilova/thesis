@@ -1,0 +1,13 @@
+\,MoscowDepot,Yaroslavl_LENTA1,Yaroslavl_7Continent,Yaroslavl_ATAK,Yaroslavl_ASHANn,Yaroslavl_ASHANp,Yaroslavl_LENTA,Yaroslavl_Giperglobus,Yaroslavl_Magnit,Kostroma_ASHAN,Kostroma_7Continent,MoscowDepotEND
+MoscowDepot,.,3.63,3.32,3.5,3.33,3.55,3.63,3.73,3.5,4.34,4.22,1000
+Yaroslavl_LENTA1,3.68,.,0.27,0.33,0.29,0.07,0.2,0.33,0.33,1.31,1.2,3.68
+Yaroslavl_7Continent,3.43,0.32,.,0.19,0.04,0.24,0.32,0.42,0.2,1.11,0.99,3.43
+Yaroslavl_ATAK,3.61,0.35,0.19,.,0.21,0.26,0.34,0.44,0.07,1.05,0.93,3.61
+Yaroslavl_ASHANn,3.44,0.34,0.04,0.21,.,0.26,0.34,0.44,0.22,1.08,0.97,3.44
+Yaroslavl_ASHANp,3.64,0.08,0.22,0.28,0.24,.,0.16,0.26,0.28,1.26,1.15,3.64
+Yaroslavl_LENTA,3.71,0.23,0.3,0.35,0.32,0.15,.,0.16,0.36,1.34,1.22,3.71
+Yaroslavl_Giperglobus,3.83,0.32,0.41,0.47,0.43,0.26,0.18,.,0.47,1.45,1.34,3.83
+Yaroslavl_Magnit,3.63,0.37,0.21,0.08,0.23,0.28,0.36,0.46,.,1.02,0.9,3.63
+Kostroma_ASHAN,4.48,1.35,1.11,1.06,1.09,1.26,1.35,1.45,1.03,.,0.13,4.48
+Kostroma_7Continent,4.35,1.22,0.99,0.93,0.97,1.14,1.22,1.32,0.9,0.12,.,4.35
+MoscowDepotEND,0,3.63,3.32,3.5,3.33,3.55,3.63,3.73,3.5,4.34,4.22,.

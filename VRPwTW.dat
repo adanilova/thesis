@@ -1,52 +1,37 @@
 # Data VRPwTW
 
-set NODE := Aberdeen Banchory Clova Cornhill Dufftown Fyvie Huntly Newbyth
-Newmill Peterhead Strichen Towie Turiff AberdeenEND;
+set NODE := MoscowDepot Yaroslavl_LENTA Yaroslavl_7Continent Yaroslavl_ATAK Yaroslavl_ASHANn Yaroslavl_ASHANp Yaroslavl_LENTA
+Yaroslavl_Giperglobus Yaroslavl_Magnit Kostroma_ASHAN Kostroma_7Continent MoscowDepotEND;
 set VEHICLES:= 1 2 3 4 5;
 
 
-param start := 'Aberdeen';
-param end := 'AberdeenEND';
+param start := 'MoscowDepot';
+param end := 'MoscowDepotEND';
+
 param capacity :=
-1 30
-2 30
-3 30
-4 30
-5 30;
+1 20000
+2 20000
+3 20000
+4 20000
+5 20000;
 
 
 
-param travel_distance:	
-	      	Banchory Clova Cornhill Dufftown Fyvie Huntly Newbyth Newmill Peterhead Strichen Towie Turiff AberdeenEND:=
-Aberdeen	28.4	58.1	84.7	83.4	41.1	63.0	59.5	31.8	51.5	56.7	62.1	55.1	10000
-Banchory	.	48.1	89.7	76.1	52.7	67.9	75.3	36.8	82.5	87.8	47.5	66.7	28.4
-Clova		48.1	.	46.3	34.1	48.6	24.5	66.1	48.6	95.3	80.00	13.0	51.9	58.1
-Cornhill	89.7	46.3	.	36.8	34.9	23.2	35.1	55.2	70.0	47.0	53.3	21.0	84.7
-Dufftown	76.1	34.1	36.8	.	53.8	21.8	63.4	64.4	100.4	77.3	41.0	49.2	83.4
-Fyvie		52.7	48.6	34.9	53.8	.	33.4	22.7	21.0	50.2	34.8	55.5	14.2	41.1
-Huntly		67.9	24.5	23.2	21.8	33.4	.	42.9	43.9	79.9	56.8	31.4	28.7	63.0
-Newbyth		75.3	66.1	35.1	63.4	22.7	42.9	.	43.5	39.8	16.9	72.9	15.1	59.5
-Newmill		36.8	48.6	55.2	64.4	21.0	43.9	43.5	.	50.3	43.9	52.7	34.9	31.8
-Peterhead	82.5	95.3	70.0	100.4	50.2	79.9	39.8	50.3	.	24.7	100.6	47.8	51.5
-Strichen	87.8	80.0	47.0	77.3	34.8	56.8	16.9	43.9	24.7	.	86.9	28.4	56.7
-Towie		47.5	13.0	53.3	41.0	55.5	31.4	72.9	52.7	100.6	86.9	.	58.8	62.1
-Turiff		66.7	51.9	21.0	49.2	14.2	28.7	15.1	34.9	47.8	28.4	58.8	.	55.1;
-
-param travel_time: 	
-		Banchory Clova Cornhill Dufftown Fyvie Huntly Newbyth Newmill Peterhead Strichen Towie Turiff AberdeenEND:=
-Aberdeen	34	74	89	87	51	65	70	37	58	62	67	67	10000
-Banchory	.	58	96	87	63	72	90	44	88	92	54	79	34
-Clova		58	.	56	42	70	31	80	61	117	97	19	64	74
-Cornhill	96	56	.	43	42	27	38	68	80	52	61	27	89
-Dufftown	87	42	43	.	65	26	74	67	113	91	47	58	87
-Fyvie		63	70	42	65	.	43	27	28	63	43	75	16	51
-Huntly		72	31	27	26	43	.	51	44	90	68	36	35	65
-Newbyth		90	80	38	74	27	51	.	54	49	21	84	18	70
-Newmill		44	61	68	67	28	44	54	.	63	57	63	44	37
-Peterhead	88	117	80	113	63	90	49	63	.	30	118	59	58
-Strichen	92	97	52	91	43	68	21	57	30	.	102	35	62
-Towie		54	19	61	47	75	36	84	63	118	102	.	69	67
-Turiff		79	64	27	58	16	35	18	44	59	35	69	.	67;
+param travel_time:
+		Kostroma_ASHAN Yaroslavl_LENTA Yaroslavl_LENTA Yaroslavl_7Continent Yaroslavl_ATAK Yaroslavl_ASHANn Yaroslavl_ASHANp Yaroslavl_LENTA Yaroslavl_Giperglobus Yaroslavl_Magnit Kostroma_ASHAN MoscowDepotEND :=
+MoscowDepot	34	74	89	87	51	65	70	37	58	62	67	67	10000
+Kostroma_ASHAN	.	58	96	87	63	72	90	44	88	92	54	79	34
+Yaroslavl_LENTA		58	.	56	42	70	31	80	61	117	97	19	64	74
+Yaroslavl_LENTA	96	56	.	43	42	27	38	68	80	52	61	27	89
+Yaroslavl_7Continent	87	42	43	.	65	26	74	67	113	91	47	58	87
+Yaroslavl_ATAK		63	70	42	65	.	43	27	28	63	43	75	16	51
+Yaroslavl_ASHANn		72	31	27	26	43	.	51	44	90	68	36	35	65
+Yaroslavl_ASHANp		90	80	38	74	27	51	.	54	49	21	84	18	70
+Yaroslavl_LENTA		44	61	68	67	28	44	54	.	63	57	63	44	37
+Yaroslavl_Giperglobus	88	117	80	113	63	90	49	63	.	30	118	59	58
+Yaroslavl_Magnit	92	97	52	91	43	68	21	57	30	.	102	35	62
+Kostroma_ASHAN		54	19	61	47	75	36	84	63	118	102	.	69	67
+Kostroma_7Continent		79	64	27	58	16	35	18	44	59	35	69	.	67;
 
 
 param:		demand	start_window	end_window	service_time :=
@@ -55,7 +40,7 @@ Banchory 	9	0		150		15
 Clova 		7	0		210		15
 Cornhill 	5	0		210		15
 Dufftown 	4	120		330		15
-Fyvie 		8	0		210		15		
+Fyvie 		8	0		210		15
 Huntly 		8	120		270		15
 Newbyth 	7	0		210		15
 Newmill 	6	60		210		15
@@ -64,5 +49,3 @@ Strichen 	6	0		135		15
 Towie 		4	60		225		15
 Turiff 		6	60		210		15
 AberdeenEND	0	0		300		0;
-
-
