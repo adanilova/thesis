@@ -1,37 +1,29 @@
-Travel_Cost = 618.2
+Travel_Cost = 110.49
 
 X :=
-Aberdeen  Banchory    1   1
-Aberdeen  Fyvie       3   1
-Aberdeen  Newmill     4   1
-Aberdeen  Peterhead   2   1
-Aberdeen  Towie       5   1
-Banchory  AberdeenEND 1   1
-Clova     Dufftown    5   1
-Cornhill  Newbyth     3   1
-Dufftown  Huntly      5   1
-Fyvie     Turiff      3   1
-Huntly    AberdeenEND 5   1
-Newbyth   AberdeenEND 3   1
-Newmill   AberdeenEND 4   1
-Peterhead Strichen    2   1
-Strichen  AberdeenEND 2   1
-Towie     Clova       5   1
-Turiff    Cornhill    3   1
+Kostroma_7Continent   Kostroma_ASHAN        1   1
+Kostroma_ASHAN        MoscowDepotEND        1   1
+MoscowDepot           Yaroslavl_Giperglobus 2   1
+MoscowDepot           Yaroslavl_Magnit      1   1
+Yaroslavl_7Continent  Yaroslavl_LENTA       1   1
+Yaroslavl_ASHANn      Kostroma_7Continent   1   1
+Yaroslavl_ASHANp      Yaroslavl_ASHANn      1   1
+Yaroslavl_ATAK        Yaroslavl_7Continent  1   1
+Yaroslavl_Giperglobus MoscowDepotEND        2   1
+Yaroslavl_LENTA       Yaroslavl_LENTA1      1   1
+Yaroslavl_LENTA1      Yaroslavl_ASHANp      1   1
+Yaroslavl_Magnit      Yaroslavl_ATAK        1   1
 ;
 
 Visit :=
-Banchory  1   1
-Clova     5   1
-Cornhill  3   1
-Dufftown  5   1
-Fyvie     3   1
-Huntly    5   1
-Newbyth   3   1
-Newmill   4   1
-Peterhead 2   1
-Strichen  2   1
-Towie     5   1
-Turiff    3   1
+Kostroma_7Continent   1   1
+Kostroma_ASHAN        1   1
+Yaroslavl_7Continent  1   1
+Yaroslavl_ASHANn      1   1
+Yaroslavl_ASHANp      1   1
+Yaroslavl_ATAK        1   1
+Yaroslavl_Giperglobus 2   1
+Yaroslavl_LENTA       1   1
+Yaroslavl_LENTA1      1   1
+Yaroslavl_Magnit      1   1
 ;
-

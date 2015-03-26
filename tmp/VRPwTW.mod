@@ -39,9 +39,9 @@ var Flow {ARC,VEHICLES};							# flow on ARC (i,j)
 var ATime {i in NODE, k in VEHICLES} >= day_start, <= day_end;	 		# arrival time for vehicle k at node i
 var DTime {i in NODE, k in VEHICLES} >= day_start, <= day_end;			# departure time for vehicle k at node i
 var RouteDuration {VEHICLES};							# route duration of vehicle k
-var WTime {i in CUSTOMER, k in VEHICLES} >= day_start, <= day_end;		# waiting time of vehicle k at customer i
+var WTime {i in NODE, k in VEHICLES} >= day_start, <= day_end;		# waiting time of vehicle k at customer i
 var TDemand {k in VEHICLES};							# total demand loaded in vehicle k at depot
-var W1Time {i in CUSTOMER, k in VEHICLES} >= day_start,;
+
 
 
 # MODEL
@@ -76,7 +76,7 @@ subject to Loading {k in VEHICLES}:
 #	>= demand[i]*CustAssigne[i,k];						## satisfaction of the demand of each customers on arc
 
 subject to Start_Time { k in VEHICLES}:
-	W1Time [start,k] = 0;							#7 start time is 0
+	WTime [start,k] = 0;							#7 start time is 0
 
 subject to TW {(i,j) in ARC,k in VEHICLES}:
 	WTime[i,k] + service_time[i] + travel_time[i,j] - WTime[j,k]<=

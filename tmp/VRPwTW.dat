@@ -5,7 +5,7 @@ Yaroslavl_Giperglobus Yaroslavl_Magnit Kostroma_ASHAN Kostroma_7Continent Moscow
 set VEHICLES:= 1 2;
 
 
-param start := MoscowDepot;
+param start := 'MoscowDepot';
 param end := 'MoscowDepotEND';
 
 param capacity :=
