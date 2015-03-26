@@ -14,7 +14,7 @@ set  city[i] := Tver_LENTA;
 
 set  city[k] := Kostroma_ASHAN;
 
-set  city[i] := Yaroslavl_LENTA;
+set  city[i] := Yaroslavl_LENTA1;
 
 set  city[i] := Yaroslavl_7Continent;
 
@@ -87,4 +87,3 @@ set  city[i] := Kazan_ASHANy;
 set  city[i] := Kazan_Zelgros;
 
 set  city[i] := Kazan_ASHANp;
-
