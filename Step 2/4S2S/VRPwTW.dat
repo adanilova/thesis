@@ -18,34 +18,32 @@ param capacity :=
 
 
 param travel_time:
-		Kostroma_ASHAN Yaroslavl_LENTA Yaroslavl_LENTA Yaroslavl_7Continent Yaroslavl_ATAK Yaroslavl_ASHANn Yaroslavl_ASHANp Yaroslavl_LENTA Yaroslavl_Giperglobus Yaroslavl_Magnit Kostroma_ASHAN MoscowDepotEND :=
-MoscowDepot	34	74	89	87	51	65	70	37	58	62	67	67	10000
-Kostroma_ASHAN	.	58	96	87	63	72	90	44	88	92	54	79	34
-Yaroslavl_LENTA		58	.	56	42	70	31	80	61	117	97	19	64	74
-Yaroslavl_LENTA	96	56	.	43	42	27	38	68	80	52	61	27	89
-Yaroslavl_7Continent	87	42	43	.	65	26	74	67	113	91	47	58	87
-Yaroslavl_ATAK		63	70	42	65	.	43	27	28	63	43	75	16	51
-Yaroslavl_ASHANn		72	31	27	26	43	.	51	44	90	68	36	35	65
-Yaroslavl_ASHANp		90	80	38	74	27	51	.	54	49	21	84	18	70
-Yaroslavl_LENTA		44	61	68	67	28	44	54	.	63	57	63	44	37
-Yaroslavl_Giperglobus	88	117	80	113	63	90	49	63	.	30	118	59	58
-Yaroslavl_Magnit	92	97	52	91	43	68	21	57	30	.	102	35	62
-Kostroma_ASHAN		54	19	61	47	75	36	84	63	118	102	.	69	67
-Kostroma_7Continent		79	64	27	58	16	35	18	44	59	35	69	.	67;
+	MoscowDepot	Kostroma_ASHAN	Yaroslavl_LENTA1	Yaroslavl_7Continent	Yaroslavl_ATAK	Yaroslavl_ASHANn	Yaroslavl_ASHANp	Yaroslavl_LENTA	Yaroslavl_Giperglobus	Yaroslavl_Magnit	Kostroma_ASHAN	Kostroma_7Continent	MoscowDepotEND:=
+MoscowDepot		.	4.34	3.63	3.32	3.5	3.33	3.55	3.63	3.73	3.5	4.34	4.22	1000
+Kostroma_ASHAN		4.48	.	1.35	1.11	1.06	1.09	1.26	1.35	1.45	1.03	.	0.13	4.48
+Yaroslavl_LENTA1	3.68	1.31	.	0.27	0.33	0.29	0.07	.	0.33	0.33	1.31	1.2	3.68
+Yaroslavl_7Continent	3.43	1.11	0.32	.	0.19	0.04	0.24	0.32	0.42	0.2	1.11	0.99	3.43
+Yaroslavl_ATAK		3.61	1.05	0.35	0.19	.	0.21	0.26	0.35	0.44	0.07	1.05	0.93	3.61
+Yaroslavl_ASHANn	3.44	1.08	0.34	0.04	0.21	.	0.26	0.34	0.44	0.22	1.08	0.97	3.44
+Yaroslavl_ASHANp	3.64	1.26	0.08	0.22	0.28	0.24	.	0.08	0.26	0.28	1.26	1.15	3.64
+Yaroslavl_LENTA		3.68	1.31	.	0.27	0.33	0.29	0.07	.	0.33	0.33	1.31	1.2	3.68
+Yaroslavl_Giperglobus	3.83	1.45	0.32	0.41	0.47	0.43	0.26	0.32	.	0.47	1.45	1.34	3.83
+Yaroslavl_Magnit	3.63	1.02	0.37	0.21	0.08	0.23	0.28	0.37	0.46	.	1.02	0.9	3.63
+Kostroma_ASHAN		4.48	.	1.35	1.11	1.06	1.09	1.26	1.35	1.45	1.03	.	0.13	4.48
+Kostroma_7Continent	4.35	0.12	1.22	0.99	0.93	0.97	1.14	1.22	1.32	0.9	0.12	.	4.35
+MoscowDepotEND		0	4.34	3.63	3.32	3.5	3.33	3.55	3.63	3.73	3.5	4.34	4.22	.;
 
 
-param:		demand	start_window	end_window	service_time :=
-Aberdeen	0	0		300		15
-Banchory 	9	0		150		15
-Clova 		7	0		210		15
-Cornhill 	5	0		210		15
-Dufftown 	4	120		330		15
-Fyvie 		8	0		210		15
-Huntly 		8	120		270		15
-Newbyth 	7	0		210		15
-Newmill 	6	60		210		15
-Peterhead 	6	0		90		15
-Strichen 	6	0		135		15
-Towie 		4	60		225		15
-Turiff 		6	60		210		15
-AberdeenEND	0	0		300		0;
+param:			demand	start_twindow	end_twindow	service_time :=
+MoscowDepot		0	0               24              0
+Kostroma_ASHAN		510	7               16              0.25
+Yaroslavl_LENTA1	857	7               16              0.25
+Yaroslavl_7Continent	59	7               16              0.25
+Yaroslavl_ASHANn	197	9               11              0.25
+Yaroslavl_ASHANp	112	9               11              0.25
+Yaroslavl_LENTA		133	7               16              0.25
+Yaroslavl_Giperglobus	1600	7               16              0.25
+Yaroslavl_Magnit	2240	7               16              0.25
+Kostroma_ASHAN		510	7               16              0.25
+Kostroma_7Continent	78	7               16              0.25
+MoscowDepotEND 		0	0               24              0;
