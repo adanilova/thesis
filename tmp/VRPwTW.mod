@@ -39,7 +39,7 @@ var Flow {ARC,VEHICLES};							# flow on ARC (i,j)
 var ATime {i in NODE, k in VEHICLES} >= day_start, <= day_end;	 		# arrival time for vehicle k at node i
 var DTime {i in NODE, k in VEHICLES} >= day_start, <= day_end;			# departure time for vehicle k at node i
 var RouteDuration {VEHICLES};							# route duration of vehicle k
-var WTime {i in NODE, k in VEHICLES} >= day_start, <= day_end;		# waiting time of vehicle k at customer i
+var WTime {i in NODE, k in VEHICLES} >= day_start, <= day_end;			# waiting time of vehicle k at customer i
 var TDemand {k in VEHICLES};							# total demand loaded in vehicle k at depot
 
 

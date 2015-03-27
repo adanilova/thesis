@@ -2,15 +2,14 @@
 
 set NODE := MoscowDepot Yaroslavl_LENTA1 Yaroslavl_7Continent Yaroslavl_ATAK Yaroslavl_ASHANn Yaroslavl_ASHANp Yaroslavl_LENTA
 Yaroslavl_Giperglobus Yaroslavl_Magnit Kostroma_ASHAN Kostroma_7Continent MoscowDepotEND;
-set VEHICLES:= 1 2;
+set VEHICLES:= 1;
 
 
 param start := 'MoscowDepot';
 param end := 'MoscowDepotEND';
 
 param capacity :=
-1 20000
-2 20000;
+1 20000;
 
 
 
@@ -30,7 +29,7 @@ Kostroma_7Continent	1.22	0.99	0.93	0.97	1.14	1.22	1.32	0.9	0.12	.	4.35;
 
 
 param:			demand	start_twindow	end_twindow	service_time :=
-MoscowDepot		0	0               24              0
+MoscowDepot		0	0               50              0
 Yaroslavl_LENTA1	857	7               16              0.25
 Yaroslavl_7Continent	59	7               16              0.25
 Yaroslavl_ATAK          32	7		16		0.25
@@ -41,4 +40,4 @@ Yaroslavl_Giperglobus	1600	7               16              0.25
 Yaroslavl_Magnit	2240	7               16              0.25
 Kostroma_ASHAN		510	7               16              0.25
 Kostroma_7Continent	78	7               16              0.25
-MoscowDepotEND 		0	0               24              0;
+MoscowDepotEND 		0	0               50              0;
