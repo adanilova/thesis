@@ -75,17 +75,6 @@ subject to Loading {k in VEHICLES}:
 subject to Start_Time {k in VEHICLES}:
 	WTime [start,k] = 0;							#7 start time is 0
 
-subject to TW {(i,j) in ARC,k in VEHICLES}:
-	WTime[i,k] + service_time[i] + travel_time[i,j] - WTime[j,k]<=
-	(1 - X[i,j,k]) * max ((end_twindow[i] + service_time[i] +
-	travel_time[i,j] - start_twindow[j]),0);				#8
-
-subject to time1 {i in CUSTOMER, k in VEHICLES}:				#9
-	start_twindow[i] * Visit[i,k] <= WTime[i,k];
-
-subject to time2 {i in CUSTOMER, k in VEHICLES}:				#9
-	WTime[i,k]<= end_twindow[i] -service_time[i];
-
 subject to VisitedNode {i in CUSTOMER, k in VEHICLES}:
 	Visit[i,k] = sum {(i,j) in ARC} X[i,j,k];
 
@@ -112,21 +101,21 @@ subject to DepartureTime {i in CUSTOMER, k in VEHICLES}:			##12 Departure time >
 	DTime[i,k] >= ATime[i,k]+WTime[i,k] + service_time[i] -
 	M*(1-CustAssigne[i,k]);
 
-#subject to ArrivalTime {(i,j) in ARC, k in VEHICLES}:				##13
-#	ATime [j,k] >= DTime[i,k] + travel_time[i,j] -
-#	M*(1-X[i,j,k]);
+subject to ArrivalTime {(i,j) in ARC, k in VEHICLES}:				##13
+	ATime [j,k] >= DTime[i,k] + travel_time[i,j] -
+	M*(1-X[i,j,k]);
 
-#subject to ArrivalTime1 {(i,j) in ARC, k in VEHICLES}:				##14
-#	ATime [j,k] <= DTime[i,k] + travel_time[i,j] +
-#	M*(1-X[i,j,k]);
+subject to ArrivalTime1 {(i,j) in ARC, k in VEHICLES}:				##14
+	ATime [j,k] <= DTime[i,k] + travel_time[i,j] +
+	M*(1-X[i,j,k]);
 
 #subject to Availability {(i,j) in ARC, k in VEHICLES}:				# constraint for customer availability
 #	Available[i,j,k] <= ATime[i,k] / 24;
 
-#subject to STW {(i,j) in ARC, k in VEHICLES}:					##15
-#	ATime[i,k] + WTime [i,k] >= start_twindow [i] -
-#	M*(1-CustAssigne[i,k]) - M*(1-Served[i]);
+subject to STW {(i,j) in ARC, k in VEHICLES}:					##15
+	ATime[i,k] + WTime [i,k] >= start_twindow [i] -
+	M*(1-CustAssigne[i,k]) - M*(1-Served[i]);
 
-#subject to ETW {(i,j) in ARC, k in VEHICLES}:					##16
-#	ATime[i,k] + WTime [i,k] <= end_twindow [i] -
-#	M*(1-CustAssigne[i,k]) - M*(1-Served[i]);
+subject to ETW {(i,j) in ARC, k in VEHICLES}:					##16
+	ATime[i,k] + WTime [i,k] <= end_twindow [i] -
+	M*(1-CustAssigne[i,k]) - M*(1-Served[i]);
