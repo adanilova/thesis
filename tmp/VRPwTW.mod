@@ -8,7 +8,6 @@ param end symbolic, <> start;							# copy of depot
 set ARC := {(i,j) in ((NODE diff {end}) cross (NODE diff{start})):i<>j};	# set of arcs
 set CUSTOMER := {NODE diff {start, end}};					# set of customers
 set VEHICLES;									# set of vehicles
-set TIMEWINDOW := {i in CUSTOMER};						# set of time window for each customer
 
 # PARAMETRS
 
@@ -28,7 +27,7 @@ param end_available {NODE};
 param service_time {NODE} >= 0; 						# service time at node i
 param day_start:= start_twindow[start];						# start of time horizon
 param day_end:= end_twindow [end];						# end of time horizon
-param M = 10000;								#Large constarnt
+param M = 10000;								# large constarnt
 param maxduration {VEHICLES};							# max rout duration
 
 # VARIABLES
@@ -78,8 +77,28 @@ subject to Start_Time {k in VEHICLES}:
 subject to VisitedNode {i in CUSTOMER, k in VEHICLES}:
 	Visit[i,k] = sum {(i,j) in ARC} X[i,j,k];
 
-subject to TotalDemand {k in VEHICLES}:
-	sum {i in CUSTOMER}Visit[i,k]*demand[i] = TDemand[k];
+subject to TotalDemand {k in VEHICLES}:						# total demand on route
+	TDemand[k] = sum {i in CUSTOMER}Visit[i,k]*demand[i];
+
+#subject to VehicleRouteDuration {k in VEHICLES}:				# total route travel time
+#	RouteDuration[k] = sum {(i,j) in ARC} travel_time [i,j] * X[i,j,k];
+
+
+
+subject to TW {(i,j) in ARC,k in VEHICLES}:
+	WTime[i,k] + service_time[i] + travel_time[i,j] - WTime[j,k]<=
+	(1 - X[i,j,k]) * max ((end_twindow[i] + service_time[i] +
+	travel_time[i,j] - start_twindow[j]),0);				#8
+
+subject to time1 {i in CUSTOMER, k in VEHICLES}:				#9
+	start_twindow[i] * Visit[i,k] <= ATime[i,k] + WTime[i,k];
+
+subject to time2 {i in CUSTOMER, k in VEHICLES}:				#9
+	DTime[i,k]<= end_twindow[i] -service_time[i];
+
+#subject to WaitingTimeAtNode {i in CUSTOMER,k in VEHICLES}:
+#	WTime [i,k] <= start_twindow[i]* Visit[i,k] - ATime[i,k];
+
 ####################################
 
 subject to DemandSatisfaction {k in VEHICLES}:					##7
@@ -101,21 +120,21 @@ subject to DepartureTime {i in CUSTOMER, k in VEHICLES}:			##12 Departure time >
 	DTime[i,k] >= ATime[i,k]+WTime[i,k] + service_time[i] -
 	M*(1-CustAssigne[i,k]);
 
-subject to ArrivalTime {(i,j) in ARC, k in VEHICLES}:				##13
-	ATime [j,k] >= DTime[i,k] + travel_time[i,j] -
-	M*(1-X[i,j,k]);
+#subject to ArrivalTime {(i,j) in ARC, k in VEHICLES}:				##13
+#	ATime [j,k] >= DTime[i,k] + travel_time[i,j] -
+#	M*(1-X[i,j,k]);
 
-subject to ArrivalTime1 {(i,j) in ARC, k in VEHICLES}:				##14
-	ATime [j,k] <= DTime[i,k] + travel_time[i,j] +
-	M*(1-X[i,j,k]);
+#subject to ArrivalTime1 {(i,j) in ARC, k in VEHICLES}:				##14
+#	ATime [j,k] <= DTime[i,k] + travel_time[i,j] +
+#	M*(1-X[i,j,k]);
 
 #subject to Availability {(i,j) in ARC, k in VEHICLES}:				# constraint for customer availability
 #	Available[i,j,k] <= ATime[i,k] / 24;
 
-subject to STW {(i,j) in ARC, k in VEHICLES}:					##15
-	ATime[i,k] + WTime [i,k] >= start_twindow [i] -
-	M*(1-CustAssigne[i,k]) - M*(1-Served[i]);
+#subject to STW {(i,j) in ARC, k in VEHICLES}:					##15
+#	ATime[i,k] + WTime [i,k] >= start_twindow [i] -
+#	M*(1-CustAssigne[i,k]) - M*(1-Served[i]);
 
-subject to ETW {(i,j) in ARC, k in VEHICLES}:					##16
-	ATime[i,k] + WTime [i,k] <= end_twindow [i] -
-	M*(1-CustAssigne[i,k]) - M*(1-Served[i]);
+#subject to ETW {(i,j) in ARC, k in VEHICLES}:					##16
+#	ATime[i,k] + WTime [i,k] <= end_twindow [i] -
+#	M*(1-CustAssigne[i,k]) - M*(1-Served[i]);
