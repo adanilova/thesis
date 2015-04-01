@@ -32,7 +32,7 @@ Kostroma_7Continent	1.22	0.99	0.93	0.97	1.14	1.22	1.32	0.9	0.12	.	4.35;
 
 
 param:			demand	start_twindow	end_twindow	service_time 	start_available	end_available:=
-MoscowDepot		0	0               50              0		0			3
+MoscowDepot		0	0               24              0		0			3
 Yaroslavl_LENTA1	857	7               16              0.2		0			3
 Yaroslavl_7Continent	59	7               16              0.2		0			3
 Yaroslavl_ATAK          32	7		16		0.2		0			3
@@ -43,4 +43,4 @@ Yaroslavl_Giperglobus	1600	7               16              0.2		0			3
 Yaroslavl_Magnit	2240	7               16              0.2		0			3
 Kostroma_ASHAN		510	7               16              0.2		0			3
 Kostroma_7Continent	78	7               16              0.2		0			3
-MoscowDepotEND 		0	0               50              0		0			3;
+MoscowDepotEND 		0	0               24              0		0			3;
