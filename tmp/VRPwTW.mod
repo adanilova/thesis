@@ -71,8 +71,11 @@ subject to Input_Output_Balance {j in CUSTOMER, k in VEHICLES}:			#5 if one vehi
 subject to Loading {k in VEHICLES}:
 	sum {i in CUSTOMER, (i,j) in ARC} demand[i] * X[i,j,k] <= capacity[k]; 	#6 capacity should not be exeed
 
-subject to Start_Time {k in VEHICLES}:
-	WTime [start,k] = 0;							#7 start time is 0
+subject to WStart_Time {k in VEHICLES}:
+	WTime [start,k] = 0;							#7 start waiting time is 0
+
+
+
 
 subject to VisitedNode {i in CUSTOMER, k in VEHICLES}:
 	Visit[i,k] = sum {(i,j) in ARC} X[i,j,k];
@@ -80,8 +83,8 @@ subject to VisitedNode {i in CUSTOMER, k in VEHICLES}:
 subject to TotalDemand {k in VEHICLES}:						# total demand on route
 	TDemand[k] = sum {i in CUSTOMER}Visit[i,k]*demand[i];
 
-#subject to VehicleRouteDuration {k in VEHICLES}:				# total route travel time
-#	RouteDuration[k] = sum {(i,j) in ARC} travel_time [i,j] * X[i,j,k];
+subject to VehicleRouteDuration {k in VEHICLES}:				# total route travel time
+	RouteDuration[k] = sum {(i,j) in ARC} travel_time [i,j] * X[i,j,k];
 
 
 
@@ -96,8 +99,8 @@ subject to time1 {i in CUSTOMER, k in VEHICLES}:				#9
 subject to time2 {i in CUSTOMER, k in VEHICLES}:				#9
 	DTime[i,k]<= end_twindow[i] -service_time[i];
 
-#subject to WaitingTimeAtNode {i in CUSTOMER,k in VEHICLES}:
-#	WTime [i,k] <= start_twindow[i]* Visit[i,k] - ATime[i,k];
+subject to WaitingTimeAtNode {i in CUSTOMER,k in VEHICLES}:
+	WTime [i,k] <= start_twindow[i]* Visit[i,k] - ATime[i,k];
 
 ####################################
 
@@ -116,9 +119,9 @@ subject to maxRouteDuration {i in NODE,k in VEHICLES}:
 	ATime[start,k] - DTime[end,k] <= maxduration[k] - M*(1-CustAssigne[i,k]);
 
 
-subject to DepartureTime {i in CUSTOMER, k in VEHICLES}:			##12 Departure time >= arrival time + service_time
-	DTime[i,k] >= ATime[i,k]+WTime[i,k] + service_time[i] -
-	M*(1-CustAssigne[i,k]);
+#subject to DepartureTime {i in CUSTOMER, k in VEHICLES}:			##12 Departure time >= arrival time + service_time
+#	DTime[i,k] >= ATime[i,k]+WTime[i,k] + service_time[i] -
+#	M*(1-CustAssigne[i,k]);
 
 #subject to ArrivalTime {(i,j) in ARC, k in VEHICLES}:				##13
 #	ATime [j,k] >= DTime[i,k] + travel_time[i,j] -
