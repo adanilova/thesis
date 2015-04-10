@@ -14,7 +14,7 @@ option omit_zero_rows 1;
 solve;
 
 display Travel_Cost > VRPwTW.sol;
-display X> VRPwTW.sol;
+display X > VRPwTW.sol;
 display Visit > VRPwTW.sol;
 display Served > VRPwTW.sol;
 display Flow > VRPwTW.sol;
