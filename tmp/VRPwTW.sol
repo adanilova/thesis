@@ -1,4 +1,4 @@
-Travel_Cost = 10.93
+Travel_Cost = 13.59
 
 X :=
 Kostroma_7Continent   Yaroslavl_Magnit      1   1
@@ -20,46 +20,44 @@ Visit :=
 Served :=
 Kostroma_7Continent   1   1
 Kostroma_ASHAN        1   1
-Yaroslavl_7Continent  5   1
-Yaroslavl_ASHANn      5   1
+Yaroslavl_7Continent  1   1
+Yaroslavl_ASHANn      1   1
 Yaroslavl_ASHANp      1   1
 Yaroslavl_ATAK        1   1
-Yaroslavl_Giperglobus 5   1
+Yaroslavl_Giperglobus 1   1
 Yaroslavl_LENTA       1   1
-Yaroslavl_LENTA1      5   1
+Yaroslavl_LENTA1      1   1
 Yaroslavl_Magnit      1   1
 ;
 
 Flow :=
-MoscowDepot 1   2240
 ;
 
 ATime :=
-Kostroma_7Continent   1    12.45
-Kostroma_ASHAN        1    12.12
-MoscowDepot           1   107.78
-Yaroslavl_7Continent  1   104.01
-Yaroslavl_ASHANn      1   104.25
-Yaroslavl_ASHANp      1    14.65
-Yaroslavl_ATAK        1    13.83
-Yaroslavl_Giperglobus 1   103.4
-Yaroslavl_LENTA       1    14.38
-Yaroslavl_LENTA1      1   103
-Yaroslavl_Magnit      1    13.55
+Kostroma_7Continent   1    7.33
+Kostroma_ASHAN        1    4.34
+MoscowDepot           1   14.59
+Yaroslavl_7Continent  1   10.82
+Yaroslavl_ASHANn      1   11.06
+Yaroslavl_ASHANp      1    9.53
+Yaroslavl_ATAK        1    8.71
+Yaroslavl_Giperglobus 1   10.21
+Yaroslavl_LENTA       1    9.26
+Yaroslavl_LENTA1      1    9.81
+Yaroslavl_Magnit      1    8.43
 ;
 
 DTime :=
-Kostroma_7Continent   1    12.65
-Kostroma_ASHAN        1    12.32
-MoscowDepot           1     7.78
-Yaroslavl_7Continent  1   104.21
-Yaroslavl_ASHANn      1   104.45
-Yaroslavl_ASHANp      1   102.92
-Yaroslavl_ATAK        1    14.03
-Yaroslavl_Giperglobus 1   103.6
-Yaroslavl_LENTA       1    14.58
-Yaroslavl_LENTA1      1   103.2
-Yaroslavl_Magnit      1    13.75
+Kostroma_7Continent   1    7.53
+Kostroma_ASHAN        1    7.2
+Yaroslavl_7Continent  1   11.02
+Yaroslavl_ASHANn      1   11.26
+Yaroslavl_ASHANp      1    9.73
+Yaroslavl_ATAK        1    8.91
+Yaroslavl_Giperglobus 1   10.41
+Yaroslavl_LENTA       1    9.46
+Yaroslavl_LENTA1      1   10.01
+Yaroslavl_Magnit      1    8.63
 ;
 
 RouteDuration [*] :=
@@ -67,7 +65,9 @@ RouteDuration [*] :=
 ;
 
 WTime :=
+Kostroma_ASHAN 1   2.66
 ;
 
 TDemand [*] :=
 ;
+

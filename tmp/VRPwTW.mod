@@ -35,12 +35,12 @@ var Visit {i in CUSTOMER,k in VEHICLES} binary; 				# 1 if customer i was visite
 var VehUsed {k in VEHICLES} binary;						# 1 if  vehicle k is used
 var CustAssigne {i in NODE, k in VEHICLES} binary;				# 1 if customer i in assigned to vehicle k
 var Served {i in CUSTOMER, p in CUSTTIMEWINDOWS[i]} binary;			# 1 if customer i is served within time window p
-var Flow {NODE,VEHICLES};							# flow on ARC (i,j)
+var Flow {NODE,VEHICLES} >=0;							# flow on ARC (i,j)
 var ATime {i in NODE, k in VEHICLES} >=0;					# arrival time for vehicle k at node i
 var DTime {i in NODE, k in VEHICLES} >=0;					# departure time for vehicle k at node i
-var RouteDuration {VEHICLES};							# route duration of vehicle k
-var WTime {i in NODE, k in VEHICLES}>=0;					# waiting time of vehicle k at customer i
-var TDemand {k in VEHICLES};							# total demand loaded in vehicle k at depot
+var RouteDuration {VEHICLES} >=0;							# route duration of vehicle k
+var WTime {i in NODE, k in VEHICLES} >=0;					# waiting time of vehicle k at customer i
+var TDemand {k in VEHICLES} >=0;						# total demand loaded in vehicle k at depot
 
 # MODEL
 
@@ -51,10 +51,10 @@ minimize Travel_Cost:
 
 # CONSTRAINTS
 
-subject to Custimer_Vehicle_Balance {i in NODE}:				#1 one vehicle for customer i,j
+subject to Custimer_Vehicle_Balance {i in NODE}:				#(1) one vehicle for customer i,j
 	sum {k in VEHICLES} CustAssigne[i,k] = 1;
 
-subject to ARC_Vehicle_Balance1 {j in CUSTOMER}:				#2 one vehicle for arc i,j
+subject to ARC_Vehicle_Balance1 {j in CUSTOMER}:				#(2) one vehicle for arc i,j
 	sum {(i,j) in ARC, k in VEHICLES} X [i,j,k]= 1;
 
 subject to Input_Output_Balance2 {i in CUSTOMER, k in VEHICLES}:		#5 if one vehicle come to node - one income
@@ -94,9 +94,6 @@ subject to ArrivalTime1 {(i,j) in ARC, k in VEHICLES}:				##14 same with 13
 	ATime [j,k] <= DTime[i,k] + travel_time[i,j] +
 	M*(1-X[i,j,k]);
 
-#subject to Equal1 {i in NODE}:							# WHAT2
-	#ServedS[i,p]=ServedE[i,p];
-
 subject to STW {i in CUSTOMER, l in 1..L, p in CUSTTIMEWINDOWS[i], k in VEHICLES}:	##15 arrival time + waiting time >= start TW, only if
 	ATime[i,k] + WTime [i,k] >= timewind[i,1,p] -					# customer i is assigned to vehicle k and TW p is chosen
 	M*(1-CustAssigne[i,k]) - M*(1-Served[i,p]);
@@ -111,8 +108,11 @@ subject to visit {i in CUSTOMER}:						##17 one TW for each customer
 subject to vehicleassign{i in NODE, k in VEHICLES }:				##18 ensure that customer i is served by vehicle k only if it's used
 	VehUsed[k] >= CustAssigne[i,k];
 
-subject to WStart_Time {k in VEHICLES}:						#7 start waiting time is 0
+subject to WStart_Time {k in VEHICLES}:						#19 start waiting time is 0
 	WTime ["MoscowDepot",k] = 0;
+
+subject to DepartureTimefromDepot{k in VEHICLES}:				#20 departure time from depot is 0
+	DTime ["MoscowDepot",k] = 0;
 
 ################################################################################
 
@@ -128,10 +128,10 @@ subject to VehicleRouteDuration {k in VEHICLES}:				# total route travel time
 
 ################################################################################
 
-subject to DemandSatisfaction {k in VEHICLES}:					##7 satisfaction of the demand for visited customer i
-	(sum {(i,j) in ARC} (Flow[j,k] - Flow[i,k]))
-	= TDemand[k];
+#subject to DemandSatisfaction {k in VEHICLES}:					##7 satisfaction of the demand for visited customer i
+#	(sum {(i,j) in ARC} (Flow[j,k] - Flow[i,k]))
+#	= TDemand[k];
 
-subject to RoutLoading {i in CUSTOMER, k in VEHICLES}:				##8 satisfaction of the demand of each customers on arc
-	(sum {(i,j) in ARC} (Flow[j,k] - Flow[i,k]))
-	>= demand[i]*CustAssigne[i,k];
+#subject to RoutLoading {i in CUSTOMER, k in VEHICLES}:				##8 satisfaction of the demand of each customers on arc
+#	(sum {(i,j) in ARC} (Flow[j,k] - Flow[i,k]))
+#	>= demand[i]*CustAssigne[i,k];
