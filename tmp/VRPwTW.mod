@@ -21,8 +21,9 @@ param fix_cost {k in VEHICLES} = 1;						# vehicle using cost
 # TIME
 
 param travel_time {ARC} >= 0; 							# travel time between nodes i and j
-param start_available {NODE};							# start of serving period at node i
-param end_available {NODE};							# end of serving period at node i
+param service_available {i in CUSTOMER, p in 1..13};							# start of serving period at node i
+param start_available {NODE} >= 0;
+param end_available{NODE} >= 0;
 param service_time {NODE} >= 0; 						# service time at node i
 param M = 10000;								# large constrant
 param maxduration {VEHICLES};							# max route duration
@@ -72,12 +73,6 @@ subject to CustVisit1 {i in CUSTOMER}:						        ##5 every customer i visited
 subject to Loading {k in VEHICLES}:						#6 capacity should not be exeed
 	sum {i in CUSTOMER, (i,j) in ARC} demand[i] * X[i,j,k] <= capacity[k];
 
-#subject to DepotDTimeStart {i in NODE, k in VEHICLES,p in CUSTTIMEWINDOWS[i]}:	##9 departure time from the depot didn't exeed lower bound TW
-#	DTime["MoscowDepot",k] >= timewind["MoscowDepot",1,p] - M*(1 - CustAssigne["MoscowDepot",k]);
-
-#subject to DepotDTimeEnd {i in NODE, k in VEHICLES,p in CUSTTIMEWINDOWS[i]}:	##10 arrival time at the depot didn't exeed upper bound TW
-	#ATime["MoscowDepot",k] <= timewind["MoscowDepot",2,p] + M*(1 - CustAssigne["MoscowDepot",k]);
-
 subject to BetweenStartEnd {k in VEHICLES}:					##11 duration of each rout should exceed max route duration
 	ATime["MoscowDepot",k]-DTime["MoscowDepot",k] <= maxduration[k] +
 	M*(1 -CustAssigne["MoscowDepot",k]);
@@ -94,16 +89,22 @@ subject to ArrivalTime1 {(i,j) in ARC, k in VEHICLES}:				##14 same with 13
 	ATime [j,k] <= DTime[i,k] + travel_time[i,j] +
 	M*(1-X[i,j,k]);
 
-subject to STW {i in CUSTOMER, l in 1..L, p in CUSTTIMEWINDOWS[i], k in VEHICLES}:	##15 arrival time + waiting time >= start TW, only if
+subject to STW {i in CUSTOMER, l in 1..L, k in VEHICLES, p in CUSTTIMEWINDOWS[i]}:	##15 arrival time + waiting time >= start TW, only if
 	ATime[i,k] + WTime [i,k] >= timewind[i,1,p] -					# customer i is assigned to vehicle k and TW p is chosen
-	M*(1-CustAssigne[i,k]) - M*(1-Served[i,p]);
+	M*(1-CustAssigne[i,k]) - M*(1-Served[i,p]) + M*(1 - service_available[i,p]) ;
 
-subject to ETW {i in CUSTOMER,l in 1..L,  p in CUSTTIMEWINDOWS[i], k in VEHICLES}:	##16 arrival time + waiting time <= end TW, only if
+subject to ETW {i in CUSTOMER, l in 1..L, k in VEHICLES, p in CUSTTIMEWINDOWS[i]}:	##16 arrival time + waiting time <= end TW, only if
 	ATime[i,k] + WTime [i,k]+service_time[i] <= timewind[i,2,p] +					# customer i is assigned to vehicle k and TW p is chosen
-	M*(1-CustAssigne[i,k]) + M*(1-Served[i,p]);
+	M*(1-CustAssigne[i,k]) + M*(1-Served[i,p]) - M*(1 - service_available[i,p]);
 
 subject to visit {i in CUSTOMER}:						##17 one TW for each customer
 	sum{ p in CUSTTIMEWINDOWS[i]}Served[i,p]=1;
+
+
+
+
+
+
 
 subject to vehicleassign{i in NODE, k in VEHICLES }:				##18 ensure that customer i is served by vehicle k only if it's used
 	VehUsed[k] >= CustAssigne[i,k];
@@ -135,3 +136,18 @@ subject to DemandSatisfaction {k in VEHICLES}:					##7 satisfaction of the deman
 subject to RoutLoading {i in CUSTOMER, k in VEHICLES}:				##8 satisfaction of the demand of each customers on arc
 	(sum {(i,j) in ARC} (Flow[j,k] - Flow[i,k]))
 	>= demand[i]*CustAssigne[i,k];
+
+
+		#subject to SSA {i in CUSTOMER, l in 1..L, k in VEHICLES, p in CUSTTIMEWINDOWS[i]}:
+			#	 ATime[i,k] + WTime [i,k]+service_time[i] >= start_available[i] -
+			#	 M*(1-CustAssigne[i,k]) - M*(1-Visit[i,p]);
+
+
+			#subject to ESA {i in CUSTOMER, l in 1..L, k in VEHICLES, p in CUSTTIMEWINDOWS[i]}:
+			#	 ATime[i,k] + WTime [i,k]+service_time[i] <= end_available[i] +
+			#	 M*(1-CustAssigne[i,k]) + M*(1-Visit[i,p]);
+
+
+
+			#subject to visit1 {i in CUSTOMER}:
+	#sum{ p in CUSTTIMEWINDOWS[i]}Visit[i,p]=1;
