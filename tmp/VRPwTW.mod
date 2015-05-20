@@ -51,7 +51,7 @@ minimize Travel_Cost:
 
 # CONSTRAINTS
 
-subject to Custimer_Vehicle_Balance {i in NODE}:				#(1) one vehicle for customer i,j
+subject to Custimer_Vehicle_Balance {i in CUSTOMER}:				#(1) one vehicle for customer i,j
 	sum {k in VEHICLES} CustAssigne[i,k] = 1;
 
 subject to ARC_Vehicle_Balance1 {j in CUSTOMER}:				#(2) one vehicle for arc i,j
@@ -73,10 +73,10 @@ subject to Loading {k in VEHICLES}:						#6 capacity should not be exeed
 	sum {i in CUSTOMER, (i,j) in ARC} demand[i] * X[i,j,k] <= capacity[k];
 
 #subject to DepotDTimeStart {i in NODE, k in VEHICLES,p in CUSTTIMEWINDOWS[i]}:	##9 departure time from the depot didn't exeed lower bound TW
-	#DTime[i,k] >= timewind[i,2,p] - M*(1 - CustAssigne["MoscowDepot",k]);
+#	DTime["MoscowDepot",k] >= timewind["MoscowDepot",1,p] - M*(1 - CustAssigne["MoscowDepot",k]);
 
 #subject to DepotDTimeEnd {i in NODE, k in VEHICLES,p in CUSTTIMEWINDOWS[i]}:	##10 arrival time at the depot didn't exeed upper bound TW
-#	ATime[i,k] <= timewind[i,1,p] + M*(1 - CustAssigne["MoscowDepot",k]);
+	#ATime["MoscowDepot",k] <= timewind["MoscowDepot",2,p] + M*(1 - CustAssigne["MoscowDepot",k]);
 
 subject to BetweenStartEnd {k in VEHICLES}:					##11 duration of each rout should exceed max route duration
 	ATime["MoscowDepot",k]-DTime["MoscowDepot",k] <= maxduration[k] +
@@ -128,10 +128,10 @@ subject to VehicleRouteDuration {k in VEHICLES}:				# total route travel time
 
 ################################################################################
 
-#subject to DemandSatisfaction {k in VEHICLES}:					##7 satisfaction of the demand for visited customer i
-#	(sum {(i,j) in ARC} (Flow[j,k] - Flow[i,k]))
-#	= TDemand[k];
+subject to DemandSatisfaction {k in VEHICLES}:					##7 satisfaction of the demand for visited customer i
+	(sum {(i,j) in ARC} (Flow[j,k] - Flow[i,k]))
+	= TDemand[k];
 
-#subject to RoutLoading {i in CUSTOMER, k in VEHICLES}:				##8 satisfaction of the demand of each customers on arc
-#	(sum {(i,j) in ARC} (Flow[j,k] - Flow[i,k]))
-#	>= demand[i]*CustAssigne[i,k];
+subject to RoutLoading {i in CUSTOMER, k in VEHICLES}:				##8 satisfaction of the demand of each customers on arc
+	(sum {(i,j) in ARC} (Flow[j,k] - Flow[i,k]))
+	>= demand[i]*CustAssigne[i,k];
