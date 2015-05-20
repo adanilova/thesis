@@ -63,10 +63,10 @@ subject to Input_Output_Balance2 {i in CUSTOMER, k in VEHICLES}:		#5 if one vehi
 subject to Traverse {k in VEHICLES, (i,j) in ARC}:				##3 any ARC (i,j) can be traversed by vehicle k if both CustAssigne = 1
 	2 * X [i,j,k] <= CustAssigne [i,k] + CustAssigne [j,k];
 
-subject to CustVisit {i in NODE}:						        ##4 every customer i visited by 1 vehicle
+subject to CustVisit {i in CUSTOMER}:						        ##4 every customer i visited by 1 vehicle
 	sum {k in VEHICLES, (i,j) in ARC:i<>j} X[i,j,k] <=1;
 
-subject to CustVisit1 {i in NODE}:						        ##5 every customer i visited by 1 vehicle
+subject to CustVisit1 {i in CUSTOMER}:						        ##5 every customer i visited by 1 vehicle
 	sum {k in VEHICLES, (i,j) in ARC:i<>j} X[j,i,k] <=1;
 
 subject to Loading {k in VEHICLES}:						#6 capacity should not be exeed
@@ -99,7 +99,7 @@ subject to STW {i in CUSTOMER, l in 1..L, p in CUSTTIMEWINDOWS[i], k in VEHICLES
 	M*(1-CustAssigne[i,k]) - M*(1-Served[i,p]);
 
 subject to ETW {i in CUSTOMER,l in 1..L,  p in CUSTTIMEWINDOWS[i], k in VEHICLES}:	##16 arrival time + waiting time <= end TW, only if
-	ATime[i,k] + WTime [i,k] <= timewind[i,2,p] +					# customer i is assigned to vehicle k and TW p is chosen
+	ATime[i,k] + WTime [i,k]+service_time[i] <= timewind[i,2,p] +					# customer i is assigned to vehicle k and TW p is chosen
 	M*(1-CustAssigne[i,k]) + M*(1-Served[i,p]);
 
 subject to visit {i in CUSTOMER}:						##17 one TW for each customer
