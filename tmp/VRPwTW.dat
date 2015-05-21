@@ -5,9 +5,14 @@ Yaroslavl_Giperglobus Yaroslavl_Magnit Kostroma_ASHAN Kostroma_7Continent;
 set VEHICLES:= 1;
 
 param L:= 2;
+param travel_cost = 75;
+param waiting_cost = 31;
+param working_limit = 8;
+
 
 param service_available:
 			1	2	3	4	5	6	7	8	9	10	11	12	13:=
+MoscowDepot		1	1	1	1	1	1	1	1	1	1	1	1	1
 Yaroslavl_LENTA1	1	1	1	1	1	1	1	1	1	1	1	1	1
 Yaroslavl_7Continent	1	1	1	1	1	1	1	1	1	1	1	1	1
 Yaroslavl_ATAK		1	1	1	1	1	1	1	1	1	1	1	1	1
@@ -21,6 +26,11 @@ Kostroma_7Continent	1	1	1	1	1	1	1	1	1	1	1	1	1;
 
 
 param timewind:=
+
+[MoscowDepot,*,*]:   1   2      3       4        5      6       7        8       9      10      11      12      13 :=
+
+         1    0	 24	48	72	96	120	144	168	192	216	240	264	288
+         2    24 48	72	96	120	144	168	192	216	240	264	288	312
 
 
 [Yaroslavl_LENTA1,*,*]:   1   2      3       4        5      6       7        8       9      10      11      12      13 :=
@@ -89,12 +99,6 @@ set CUSTTIMEWINDOWS[Yaroslavl_Magnit]:=         1	2	3	4	5	6	7	8	9	10	11	12	13;
 set CUSTTIMEWINDOWS[Kostroma_ASHAN]:=           1	2	3	4	5	6	7	8	9	10	11	12	13;
 set CUSTTIMEWINDOWS[Kostroma_7Continent]:=      1	2	3	4	5	6	7	8	9	10	11	12	13;
 
-
-
-
-param numbTWfC:= Yaroslavl_LENTA1 13 Yaroslavl_7Continent 13 Yaroslavl_ATAK 13 Yaroslavl_ASHANn 13 Yaroslavl_ASHANp 13 Yaroslavl_LENTA 13
-Yaroslavl_Giperglobus 13 Yaroslavl_Magnit 13 Kostroma_ASHAN 13 Kostroma_7Continent 13;
-
 param maxduration:=
 1 100;
 
@@ -117,15 +121,15 @@ Kostroma_ASHAN		4.34	1.35	1.11	1.06	1.09	1.26	1.35	1.45	1.03	.	0.13
 Kostroma_7Continent	4.22	1.22	0.99	0.93	0.97	1.14	1.22	1.32	0.9	0.12	.;
 
 
-param:			demand	service_time 	start_available	end_available:=
-MoscowDepot		0	0		1			13
-Yaroslavl_LENTA1	857	0.2		1			13
-Yaroslavl_7Continent	59	0.2		1			13
-Yaroslavl_ATAK          32	0.2		1			13
-Yaroslavl_ASHANn	197	0.2		1			13
-Yaroslavl_ASHANp	112	0.2		1			13
-Yaroslavl_LENTA		133	0.2		1			13
-Yaroslavl_Giperglobus	1600	0.2		1			13
-Yaroslavl_Magnit	2240	0.2		1			13
-Kostroma_ASHAN		510	0.2		1			13
-Kostroma_7Continent	78	0.2		1			13;
+param:								demand	service_time 	start_available	end_available:=
+MoscowDepot						0				0							1								13
+Yaroslavl_LENTA1			857			0.2						1								13
+Yaroslavl_7Continent	59			0.2						1								13
+Yaroslavl_ATAK        32			0.2						1								13
+Yaroslavl_ASHANn			197			0.2						1								13
+Yaroslavl_ASHANp			112			0.2						1								13
+Yaroslavl_LENTA				133			0.2						1								13
+Yaroslavl_Giperglobus	1600		0.2						1								13
+Yaroslavl_Magnit			2240		0.2						1								13
+Kostroma_ASHAN				510			0.2						1								13
+Kostroma_7Continent		78			0.2						1								13;

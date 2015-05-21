@@ -1,4 +1,4 @@
-Travel_Cost = 13.59
+Total_Cost = 828.21
 
 X :=
 Kostroma_7Continent   Yaroslavl_Magnit      1   1
@@ -14,9 +14,6 @@ Yaroslavl_LENTA1      Yaroslavl_Giperglobus 1   1
 Yaroslavl_Magnit      Yaroslavl_ATAK        1   1
 ;
 
-Visit :=
-;
-
 Served :=
 Kostroma_7Continent   1   1
 Kostroma_ASHAN        1   1
@@ -28,10 +25,6 @@ Yaroslavl_Giperglobus 1   1
 Yaroslavl_LENTA       1   1
 Yaroslavl_LENTA1      1   1
 Yaroslavl_Magnit      1   1
-;
-
-Flow :=
-MoscowDepot 1   2240
 ;
 
 ATime :=
@@ -66,8 +59,15 @@ RouteDuration [*] :=
 ;
 
 WTime :=
-Kostroma_ASHAN 1   2.66
-;
-
-TDemand [*] :=
+Kostroma_7Continent   1   0
+Kostroma_ASHAN        1   2.66
+MoscowDepot           1   0
+Yaroslavl_7Continent  1   0
+Yaroslavl_ASHANn      1   0
+Yaroslavl_ASHANp      1   0
+Yaroslavl_ATAK        1   0
+Yaroslavl_Giperglobus 1   0
+Yaroslavl_LENTA       1   0
+Yaroslavl_LENTA1      1   0
+Yaroslavl_Magnit      1   0
 ;
