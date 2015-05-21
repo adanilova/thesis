@@ -51,7 +51,11 @@ minimize Total_Cost:
 
 # CONSTRAINTS
 
+<<<<<<< Updated upstream
 subject to Custimer_Vehicle_Balance {i in NODE}:																#(1) one vehicle for customer i
+=======
+subject to Custimer_Vehicle_Balance {i in CUSTOMER}:				#(1) one vehicle for customer i,j
+>>>>>>> Stashed changes
 	sum {k in VEHICLES} CustAssigne[i,k] = 1;
 
 subject to ARC_Vehicle_Balance1 {j in NODE}:																		#(2) one vehicle for arc i,j
