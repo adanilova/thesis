@@ -1,0 +1,63 @@
+
+set POINT;
+set SUBPOINT:={ i in POINT:i<>0 and i<>40};
+set CUSTOMER:={j in POINT: j<>0 and j<>40};
+set SEED;
+set city{i in POINT};
+set SEED1;
+
+param travel_time {i in POINT, j in POINT:i<>j}>=0;
+
+param average_serv_time >=0; 
+param demand {i in CUSTOMER}>=0; 
+
+param setuptime >=0;
+param distance{ k in SEED, j in POINT:k<>j};
+param capacity>=0;
+
+
+var assign {k in SEED, j in POINT: 0<j<40 }binary; 
+
+
+data Fishe_Jacumar_reg.dat;
+
+#let customerD:= {i in customer:demand[i]>0}; 
+
+
+for {k in SEED, j in SUBPOINT:k<>j}{let distance[k,j]:=0;}
+for {k in SEED, j in SUBPOINT:k<>j} {let distance[k,j]:=travel_time[0,j]+travel_time[k,j]-travel_time[k,40] ; }
+
+
+for {k in SEED}{  
+	    	    	let SEED1:={}}
+		    
+for {k in SEED}{ for {i in SUBPOINT} 
+	    	    	{let SEED1:=SEED1 union {city[i]};}
+		    }
+
+
+model Fishe_Jacumar_reg.mod;
+
+
+
+option solver cplex;
+option omit_zero_rows 1;
+option omit_zero_cols 1;
+solve;
+
+display Travel_time>Fishe_Jacumar_reg.sol;
+display capacity>Fishe_Jacumar_reg.sol;
+#display seed>Fishe_Jacumar_reg.sol;
+
+for { k in SEED} {display city[k]>Fishe_Jacumar_reg.sol; 
+
+for { i in SUBPOINT} {if assign[k,i]=1 then display city[i]>Fishe_Jacumar_reg.sol;}}
+
+
+
+#for {m in 1..vehicle_N}{display m>Fishe_Jacumar_reg.sol;
+#for {j in SEED}{if seed[j,m]=1 then { display j>Fishe_Jacumar_reg.sol;
+
+#for {i in customer}{if assign[i,j,1]=1 then display i>Fishe_Jacumar_reg.sol;}	} } 
+
+exit;

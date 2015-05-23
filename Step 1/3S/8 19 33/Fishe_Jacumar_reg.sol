@@ -1,8 +1,8 @@
-Travel_time = 2549
+Travel_time = 5115
 
 capacity = 20000
 
-set  city[k] := Yaroslavl_LENTA1;
+set  city[k] := Yaroslavl_Magnit;
 
 set  city[i] := Yaroslavl_LENTA1;
 
@@ -20,6 +20,10 @@ set  city[i] := Yaroslavl_Giperglobus;
 
 set  city[i] := Yaroslavl_Magnit;
 
+set  city[i] := Kostroma_ASHAN;
+
+set  city[i] := Kostroma_7Continent;
+
 set  city[i] := Tver_ATAKo;
 
 set  city[i] := Tver_ATAKmk;
@@ -28,11 +32,7 @@ set  city[i] := Tver_Magnit;
 
 set  city[i] := Tver_LENTA;
 
-set  city[k] := Yekaterinburg_ASHANm;
-
-set  city[i] := Kostroma_ASHAN;
-
-set  city[i] := Kostroma_7Continent;
+set  city[k] := NNovgorod_ASHANm;
 
 set  city[i] := Ivanovo_ASHAN;
 
@@ -52,9 +52,11 @@ set  city[i] := NNovgorod_LENTA;
 
 set  city[i] := NNovgorod_ASHANm;
 
-set  city[i] := NNovgorod_Okey;
-
 set  city[i] := NNovgorod_Magnit;
+
+set  city[k] := Ufa_OKEYk;
+
+set  city[i] := NNovgorod_Okey;
 
 set  city[i] := Kazan_ASHANy;
 

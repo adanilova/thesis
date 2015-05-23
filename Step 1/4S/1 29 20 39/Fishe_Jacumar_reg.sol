@@ -1,4 +1,4 @@
-Travel_time = 2549
+Travel_time = 5045
 
 capacity = 20000
 
@@ -28,7 +28,33 @@ set  city[i] := Tver_Magnit;
 
 set  city[i] := Tver_LENTA;
 
-set  city[k] := Yekaterinburg_ASHANm;
+set  city[k] := NaberezhnyeChelny_LENTA;
+
+set  city[i] := NNovgorod_METROn;
+
+set  city[i] := NNovgorod_METROm;
+
+set  city[i] := NNovgorod_ASHANb;
+
+set  city[i] := Kazan_ASHANy;
+
+set  city[i] := Kazan_Zelgros;
+
+set  city[i] := Kazan_ASHANp;
+
+set  city[i] := NaberezhnyeChelny_LENTA;
+
+set  city[k] := NNovgorod_Okey;
+
+set  city[i] := NNovgorod_LENTA;
+
+set  city[i] := NNovgorod_ASHANm;
+
+set  city[i] := NNovgorod_Okey;
+
+set  city[i] := NNovgorod_Magnit;
+
+set  city[k] := Perm_LENTA;
 
 set  city[i] := Kostroma_ASHAN;
 
@@ -41,28 +67,6 @@ set  city[i] := Ivanovo_7Continent;
 set  city[i] := Ivanovo_Magnit;
 
 set  city[i] := Ivanovo_Okey;
-
-set  city[i] := NNovgorod_METROn;
-
-set  city[i] := NNovgorod_METROm;
-
-set  city[i] := NNovgorod_ASHANb;
-
-set  city[i] := NNovgorod_LENTA;
-
-set  city[i] := NNovgorod_ASHANm;
-
-set  city[i] := NNovgorod_Okey;
-
-set  city[i] := NNovgorod_Magnit;
-
-set  city[i] := Kazan_ASHANy;
-
-set  city[i] := Kazan_Zelgros;
-
-set  city[i] := Kazan_ASHANp;
-
-set  city[i] := NaberezhnyeChelny_LENTA;
 
 set  city[i] := Ufa_LENTA;
 

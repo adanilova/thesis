@@ -9,8 +9,9 @@
 require 'csv'
 
 cs = %w[
-  MoscowDepot Yaroslavl_LENTA1 Yaroslavl_7Continent Yaroslavl_ATAK Yaroslavl_ASHANn Yaroslavl_ASHANp Yaroslavl_LENTA
-  Yaroslavl_Giperglobus Yaroslavl_Magnit Kostroma_ASHAN Kostroma_7Continent MoscowDepotEND
+        MoscowDepot Kostroma_ASHAN Kostroma_7Continent Ivanovo_ASHAN Ivanovo_7Continent Ivanovo_Magnit Ivanovo_Okey NNovgorod_METROn NNovgorod_METROm NNovgorod_ASHANb
+        NNovgorod_LENTA NNovgorod_ASHANm NNovgorod_Okey NNovgorod_Magnit Kazan_ASHANy Kazan_Zelgros Kazan_ASHANp NaberezhnyeChelny_LENTA Ufa_LENTA Ufa_ASHAN Ufa_OKEYe
+        Ufa_OKEYk Ufa_OKEYmj Ufa_Magnit Pyshma_Perekrestok Yekaterinburg_ASHANh Yekaterinburg_ASHANm Perm_LENTA MoscowDepotEND
 ]
 
 f = File.read('traveldistance-hours.csv').chomp
