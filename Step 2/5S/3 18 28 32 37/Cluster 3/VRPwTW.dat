@@ -1,0 +1,58 @@
+# Data VRPwTW
+
+set NODE :=	MoscowDepot	Kazan_ASHANy	Kazan_Zelgros	Kazan_ASHANp;
+
+set VEHICLES:= 1;
+
+param L:= 2;
+param travel_cost = 75;
+param waiting_cost = 31;
+param working_limit = 8;
+
+
+param service_available:
+			1	2	3	4	5	6	7	8	9	10	11	12	13:=
+MoscowDepot		1	1	1	1	1	1	1	1	1	1	1	1	1
+Kazan_ASHANy		1	1	1	1	1	0	0	1	1	1	1	1	0
+Kazan_Zelgros		1	1	1	1	1	0	0	1	1	1	1	1	0
+Kazan_ASHANp		1	1	1	1	1	0	0	1	1	1	1	1	0;
+
+
+param timewind:=
+[MoscowDepot,*,*]:	  1	2	3	4	5	6	7	8	9	10	11	12	13:=
+	 1	0	24	48	72	96	120	144	168	192	216	240	264	288
+	 2	24	48	72	96	120	144	168	192	216	240	264	288	312
+[Kazan_ASHANy,*,*]:		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+			1	13	37	61	85	109	133	157	181	205	229	253	277	301
+			2	20	44	68	92	116	140	164	188	212	236	260	284	308
+[Kazan_Zelgros,*,*]:		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+			1	13	37	61	85	109	133	157	181	205	229	253	277	301
+			2	20	44	68	92	116	140	164	188	212	236	260	284	308
+[Kazan_ASHANp,*,*]:     	1	2	3	4	5	6	7	8	9	10	11	12	13:=
+			1	13	37	61	85	109	133	157	181	205	229	253	277	301
+			2	20	44	68	92	116	140	164	188	212	236	260	284	308; 
+        		
+set CUSTTIMEWINDOWS[MoscowDepot]:=              1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Kazan_ASHANy]:=		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Kazan_Zelgros]:=		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Kazan_ASHANp]:=		1	2	3	4	5	6	7	8	9	10	11	12	13;
+param maxduration:=
+1 100;
+
+param capacity :=
+1 20000;
+
+
+param travel_time:
+	MoscowDepot	Kazan_ASHANy	Kazan_Zelgros	Kazan_ASHANp:=
+MoscowDepot	.	10.73	10.88	10.89
+Kazan_ASHANy	10.83	.	0.28	0.29
+Kazan_Zelgros	11.05	0.27	.	0.13
+Kazan_ASHANp	11.11	0.33	0.17	.;
+	
+
+param:			demand	service_time:=
+MoscowDepot		0	0.2
+Kazan_ASHANy		439	0.2
+Kazan_Zelgros		123	0.2
+Kazan_ASHANp		754	0.2;
