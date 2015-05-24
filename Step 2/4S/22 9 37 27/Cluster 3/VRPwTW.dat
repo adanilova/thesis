@@ -1,0 +1,143 @@
+# Data VRPwTW
+
+set NODE :=	MoscowDepot	Yekaterinburg_ASHANh	Ivanovo_ASHAN	Ivanovo_7Continent	Ivanovo_Magnit	Ivanovo_Okey	NaberezhnyeChelny_LENTA	Ufa_LENTA	Ufa_ASHAN
+Ufa_OKEYe	Ufa_OKEYk	Ufa_OKEYmj	Ufa_Magnit	Pyshma_Perekrestok	Yekaterinburg_ASHANm	Perm_LENTA;
+set VEHICLES:= 1;
+
+param L:= 2;
+param travel_cost = 75;
+param waiting_cost = 31;
+param working_limit = 8;
+
+
+param service_available:
+			1	2	3	4	5	6	7	8	9	10	11	12	13:=
+MoscowDepot		1	1	1	1	1	1	1	1	1	1	1	1	1	
+Yekaterinburg_ASHANh	1	0	1	0	1	0	0	1	0	1	1	1	0
+Ivanovo_ASHAN		1	0	1	0	1	0	0	1	0	1	0	1	0
+Ivanovo_7Continent	1	1	1	1	1	0	0	1	1	1	1	1	0
+Ivanovo_Magnit		1	1	1	1	1	0	0	1	1	1	1	1	0
+Ivanovo_Okey		1	1	1	1	1	0	0	1	1	1	1	1	0
+NaberezhnyeChelny_LENTA	1	1	1	1	1	0	0	1	1	1	1	1	0
+Ufa_LENTA		1	1	1	1	1	0	0	1	1	1	1	1	0
+Ufa_ASHAN		0	1	1	1	0	0	0	0	1	1	1	0	0
+Ufa_OKEYe		0	1	1	1	0	0	0	0	1	1	1	0	0
+Ufa_OKEYk		0	1	1	1	0	0	0	0	1	1	1	0	0
+Ufa_OKEYmj		1	1	1	1	1	0	0	1	1	1	1	1	0
+Ufa_Magnit		1	1	1	1	1	0	0	1	1	1	1	1	0
+Pyshma_Perekrestok	1	1	1	1	1	0	0	1	1	1	1	1	0	
+Yekaterinburg_ASHANm	1	0	1	0	1	0	0	1	0	1	0	1	0
+Perm_LENTA		1	1	1	1	1	0	0	1	1	1	1	1	0;
+
+
+param timewind:=
+[MoscowDepot,*,*]:		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+			1	0	24	48	72	96	120	144	168	192	216	240	264	288
+			2	24	48	72	96	120	144	168	192	216	240	264	288	312
+[Yekaterinburg_ASHANh,*,*]:     1	2	3	4	5	6	7	8	9	10	11	12	13:=
+       			1	7	31	55	79	103	127	151	175	199	223	247	271	295
+        		2	16	40	64	88	112	136	160	184	208	232	256	280	304
+[Ivanovo_ASHAN,*,*]:    	1	2	3	4	5	6	7	8	9	10	11	12	13:=
+        		1    	7	31	55	79	103	127	151	175	199	223	247	271	295
+        		2    	16	40	64	88	112	136	160	184	208	232	256	280	304
+[Ivanovo_7Continent,*,*]:	1	2	3	4	5	6	7	8	9	10	11	12	13:=
+         		1    	7	31	55	79	103	127	151	175	199	223	247	271	295
+       			2    	16	40	64	88	112	136	160	184	208	232	256	280	304
+[Ivanovo_Magnit,*,*]:     	1	2	3	4	5	6	7	8	9	10	11	12	13:=
+        		1    	7	31	55	79	103	127	151	175	199	223	247	271	295
+        		2    	16	40	64	88	112	136	160	184	208	232	256	280	304
+[Ivanovo_Okey,*,*]:     	1	2	3	4	5	6	7	8	9	10	11	12	13:=
+        		1    	7	31	55	79	103	127	151	175	199	223	247	271	295
+        		2    	16	40	64	88	112	136	160	184	208	232	256	280	304
+[NaberezhnyeChelny_LENTA,*,*]:	1	2	3	4	5	6	7	8	9	10	11	12	13:=
+			1    	7	31	55	79	103	127	151	175	199	223	247	271	295
+        		2    	16	40	64	88	112	136	160	184	208	232	256	280	304
+[Ufa_LENTA,*,*]:    		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+         		1    	17	41	65	89	113	137	161	185	209	233	257	281	305
+         		2    	20	44	68	92	116	140	164	188	212	236	260	284	308
+[Ufa_ASHAN,*,*]:     		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+        		1	10	34	58	82	106	130	154	178	202	226	250	274	298
+        		2    	19	43	67	91	115	139	163	187	211	235	259	283	307
+[Ufa_OKEYe,*,*]:      		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+        		1	10	34	58	82	106	130	154	178	202	226	250	274	298
+       			2    	19	43	67	91	115	139	163	187	211	235	259	283	307
+[Ufa_OKEYk,*,*]:      		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+        		1	 10	34	58	82	106	130	154	178	202	226	250	274	298
+        		2    	19	43	67	91	115	139	163	187	211	235	259	283	307
+[Ufa_OKEYmj,*,*]:      		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+        		1	10	34	58	82	106	130	154	178	202	226	250	274	298
+        		2    	19	43	67	91	115	139	163	187	211	235	259	283	307
+[Ufa_Magnit,*,*]:      		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+         		1    	7	31	55	79	103	127	151	175	199	223	247	271	295
+         		2    	16	40	64	88	112	136	160	184	208	232	256	280	304
+[Pyshma_Perekrestok,*,*]:      	1	2	3	4	5	6	7	8	9	10	11	12	13:=
+         		1    	7	31	55	79	103	127	151	175	199	223	247	271	295
+         		2    	16	40	64	88	112	136	160	184	208	232	256	280	304
+[Yekaterinburg_ASHANm,*,*]:      1	2	3	4	5	6	7	8	9	10	11	12	13:=
+           		1    	7	31	55	79	103	127	151	175	199	223	247	271	295
+         		2    	16	40	64	88	112	136	160	184	208	232	256	280	304
+[Perm_LENTA,*,*]:       	1	2	3	4	5	6	7	8	9	10	11	12	13:=
+             		1	10	34	58	82	106	130	154	178	202	226	250	274	298
+        		2    	19	43	67	91	115	139	163	187	211	235	259	283	307;
+
+set CUSTTIMEWINDOWS[MoscowDepot]:=              1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Yekaterinburg_ASHANh]:=     1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ivanovo_ASHAN]:=    	1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ivanovo_7Continent]:=       1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ivanovo_Magnit]:=		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ivanovo_Okey]:=          	1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[NaberezhnyeChelny_LENTA]:=  1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ufa_LENTA]:=  		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ufa_ASHAN]:=    		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ufa_OKEYe]:=    		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ufa_OKEYk]:=    		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ufa_OKEYmj]:=      		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ufa_Magnit]:=       	1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Pyshma_Perekrestok]:=       1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Yekaterinburg_ASHANm]:=     1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Perm_LENTA]:=       	1	2	3	4	5	6	7	8	9	10	11	12	13;
+
+param maxduration:=
+1 100;
+
+param capacity :=
+1 20000;
+
+
+param travel_time:
+	MoscowDepot	Yekaterinburg_ASHANh	Ivanovo_ASHAN	Ivanovo_7Continent	Ivanovo_Magnit	Ivanovo_Okey	NaberezhnyeChelny_LENTA	Ufa_LENTA	Ufa_ASHAN	Ufa_OKEYe	Ufa_OKEYk	Ufa_OKEYmj	Ufa_Magnit	Pyshma_Perekrestok	Yekaterinburg_ASHANm	Perm_LENTA:=
+MoscowDepot		.	23.27	4.35	4.35	4.26	4.3	13.7	17.39	17.43	17.35	17.31	17.45	17.27	25.67	23.08	18.7
+Yekaterinburg_ASHANh	23.46	.	19.81	19.84	19.93	19.95	10.56	7.71	7.77	7.82	7.86	7.73	7.93	2.69	0.23	4.84
+Ivanovo_ASHAN		4.4	19.78	.	0.08	0.17	0.19	11.83	15.52	15.55	15.47	15.43	15.57	15.4	22.18	19.59	15.2
+Ivanovo_7Continent	4.4	19.81	0.08	.	0.19	0.2	11.8	15.49	15.53	15.45	15.41	15.55	15.38	22.21	19.62	15.24
+Ivanovo_Magnit		4.3	19.9	0.16	0.16	.	0.09	11.91	15.6	15.64	15.56	15.52	15.66	15.49	22.3	19.71	15.32
+Ivanovo_Okey		4.35	19.89	0.16	0.18	0.09	.	11.92	15.62	15.65	15.57	15.53	15.67	15.5	22.29	19.71	15.32
+NaberezhnyeChelny_LENTA	13.82	10.54	11.86	11.83	11.97	11.99	.	3.89	3.93	3.85	3.81	3.95	3.78	12.94	10.36	6.61
+Ufa_LENTA		17.59	7.75	15.62	15.6	15.73	15.75	3.95	.	0.18	0.2	0.21	0.28	0.27	9.57	7.65	6.58
+Ufa_ASHAN		17.67	7.82	15.71	15.68	15.82	15.83	4.04	0.21	.	0.28	0.28	0.35	0.29	9.64	7.73	6.67
+Ufa_OKEYe		17.52	7.85	15.55	15.53	15.66	15.68	3.88	0.17	0.19	.	0.07	0.13	0.29	9.67	7.76	6.51
+Ufa_OKEYk		17.47	7.9	15.51	15.48	15.62	15.64	3.84	0.21	0.23	0.06	.	0.19	0.33	9.72	7.8	6.47
+Ufa_OKEYmj		17.59	7.79	15.63	15.6	15.74	15.76	3.96	0.26	0.28	0.12	0.15	.	0.38	9.61	7.69	6.59
+Ufa_Magnit		17.48	7.98	15.52	15.49	15.63	15.64	3.84	0.27	0.24	0.34	0.35	0.41	.	9.8	7.88	6.47
+Pyshma_Perekrestok	25.96	2.75	22.3	22.34	22.43	22.45	13.06	9.65	9.72	9.77	9.81	9.68	9.88	.	2.73	7.34
+Yekaterinburg_ASHANm	23.34	0.24	19.68	19.72	19.81	19.83	10.44	7.63	7.69	7.75	7.79	7.65	7.85	2.67	.	4.72
+Perm_LENTA		18.89	4.83	15.23	15.27	15.36	15.38	6.67	6.79	6.81	6.63	6.65	6.56	6.7	7.23	4.65	.;
+
+
+param:			demand	service_time:=
+MoscowDepot		0	0.2
+Yekaterinburg_ASHANh	52	0.2
+Ivanovo_ASHAN		279	0.2
+Ivanovo_7Continent	68	0.2
+Ivanovo_Magnit		650	0.2
+Ivanovo_Okey		28	0.2
+NaberezhnyeChelny_LENTA	898	0.2
+Ufa_LENTA		1014	0.2
+Ufa_ASHAN		80	0.2
+Ufa_OKEYe		37	0.2
+Ufa_OKEYk		15	0.2
+Ufa_OKEYmj		43	0.2
+Ufa_Magnit		3500	0.2
+Pyshma_Perekrestok	221	0.2
+Yekaterinburg_ASHANm	525	0.2
+Perm_LENTA		757	0.2;

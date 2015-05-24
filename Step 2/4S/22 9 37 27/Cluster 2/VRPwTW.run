@@ -3,14 +3,37 @@
 
 
 option solver cplexamp;
-
+option cplex_options 'timing 1';
+	
 model VRPwTW.mod;
 
 data VRPwTW.dat;
 option omit_zero_rows 1;
 
+
+
 solve;
 
-display Travel_Cost > VRPwTW.sol;
-display X> VRPwTW.sol;
-display Visit > VRPwTW.sol;
+
+display Total_Cost > VRPwTW.sol;
+display X > VRPwTW.sol;
+display Served > VRPwTW.sol;
+display ATime> VRPwTW.sol;
+display DTime > VRPwTW.sol;
+
+display RouteDuration > VRPwTW.sol;
+option omit_zero_rows 0;
+display WTime > VRPwTW.sol;
+
+
+
+#expand I_whip_my_slaves_back_and_forth > VRPwTW.sol;
+#display TDemand > VRPwTW.sol;
+#display constraint_1.iis;
+#display constraint_2.iis;
+#display _varname, _var.iis, _conname, _con.iis;
+#expand DTime['Yaroslavl_LENTA1',1]
+#display Flow > VRPwTW.sol;
+#option cplex_options "iisfind=1";
+#display {p in 1..13, k in VEHICLES} 
+#	sum{(i,j) in ARC:i<>j} (X[i,j,k]*Served[i,p]*travel_time[i,j]) > VRPwTW.sol;	
