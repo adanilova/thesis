@@ -1,0 +1,25 @@
+# Run VRPwTW
+
+
+
+option solver cplexamp;
+option cplex_options 'timing 1';
+
+model VRPwTW.mod;
+
+data VRPwTW.dat;
+option omit_zero_rows 1;
+
+
+solve;
+
+display Travel_Cost > VRPwTW.sol;
+display X > VRPwTW.sol;
+display Visit > VRPwTW.sol;
+display Served > VRPwTW.sol;
+display Flow > VRPwTW.sol;
+display ATime > VRPwTW.sol;
+display DTime > VRPwTW.sol;
+display RouteDuration > VRPwTW.sol;
+display WTime > VRPwTW.sol;
+display TDemand > VRPwTW.sol;

@@ -43,3 +43,15 @@ Tver_LENTA  1   0
 Tver_Magnit 1   0
 ;
 
+CPLEX 12.6.0.0: timing 1
+
+Times (seconds):
+Input =  0
+Solve =  0.0625
+Output = 0
+IBM ILOG CPLEX Optimization Studio Commercial Edition                        �
+CPLEX 12.6.0.0: optimal integer solution; objective 419.5
+76 MIP simplex iterations
+0 branch-and-bound nodes
+
+Tool completed successfully
