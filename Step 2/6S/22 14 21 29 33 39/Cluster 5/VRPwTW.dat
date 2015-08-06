@@ -1,0 +1,82 @@
+# Data VRPwTW
+
+set NODE :=	MoscowDepot	Ufa_LENTA	Ufa_ASHAN	Ufa_OKEYe	Ufa_OKEYk	Ufa_OKEYmj	Ufa_Magnit;
+set VEHICLES:= 1;
+
+param L:= 2;
+param travel_cost = 75;
+param waiting_cost = 31;
+param working_limit = 8;
+
+
+param service_available:
+			1	2	3	4	5	6	7	8	9	10	11	12	13:=
+MoscowDepot		1	1	1	1	1	1	1	1	1	1	1	1	1
+Ufa_LENTA		1	1	1	1	1	0	0	1	1	1	1	1	0
+Ufa_ASHAN		0	1	1	1	0	0	0	0	1	1	1	0	0
+Ufa_OKEYe		0	1	1	1	0	0	0	0	1	1	1	0	0
+Ufa_OKEYk		0	1	1	1	0	0	0	0	1	1	1	0	0
+Ufa_OKEYmj		1	1	1	1	1	0	0	1	1	1	1	1	0
+Ufa_Magnit		1	1	1	1	1	0	0	1	1	1	1	1	0
+;
+
+
+param timewind:=
+[MoscowDepot,*,*]:	  1	2	3	4	5	6	7	8	9	10	11	12	13:=
+	 1	0	24	48	72	96	120	144	168	192	216	240	264	288
+	 2	24	48	72	96	120	144	168	192	216	240	264	288	312
+[Ufa_LENTA,*,*]:    		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+         		1    	17	41	65	89	113	137	161	185	209	233	257	281	305
+         		2    	20	44	68	92	116	140	164	188	212	236	260	284	308
+[Ufa_ASHAN,*,*]:     		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+        		1	10	34	58	82	106	130	154	178	202	226	250	274	298
+        		2    	19	43	67	91	115	139	163	187	211	235	259	283	307
+[Ufa_OKEYe,*,*]:      		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+        		1	10	34	58	82	106	130	154	178	202	226	250	274	298
+       			2    	19	43	67	91	115	139	163	187	211	235	259	283	307
+[Ufa_OKEYk,*,*]:      		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+        		1	 10	34	58	82	106	130	154	178	202	226	250	274	298
+        		2    	19	43	67	91	115	139	163	187	211	235	259	283	307
+[Ufa_OKEYmj,*,*]:      		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+        		1	10	34	58	82	106	130	154	178	202	226	250	274	298
+        		2    	19	43	67	91	115	139	163	187	211	235	259	283	307
+[Ufa_Magnit,*,*]:      		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+         		1    	7	31	55	79	103	127	151	175	199	223	247	271	295
+         		2    	16	40	64	88	112	136	160	184	208	232	256	280	304;
+
+
+set CUSTTIMEWINDOWS[MoscowDepot]:=              1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ufa_LENTA]:=  		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ufa_ASHAN]:=    		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ufa_OKEYe]:=    		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ufa_OKEYk]:=    		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ufa_OKEYmj]:=      		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[Ufa_Magnit]:=       	1	2	3	4	5	6	7	8	9	10	11	12	13;
+
+param maxduration:=
+1 100;
+
+param capacity :=
+1 20000;
+
+
+param travel_time:
+	MoscowDepot	Ufa_LENTA	Ufa_ASHAN	Ufa_OKEYe	Ufa_OKEYk	Ufa_OKEYmj	Ufa_Magnit:=
+MoscowDepot	.	17.39	17.43	17.35	17.31	17.45	17.27
+Ufa_LENTA	17.59	.	0.18	0.2	0.21	0.28	0.27
+Ufa_ASHAN	17.67	0.21	.	0.28	0.28	0.35	0.29
+Ufa_OKEYe	17.52	0.17	0.19	.	0.07	0.13	0.29
+Ufa_OKEYk	17.47	0.21	0.23	0.06	.	0.19	0.33
+Ufa_OKEYmj	17.59	0.26	0.28	0.12	0.15	.	0.38
+Ufa_Magnit	17.48	0.27	0.24	0.34	0.35	0.41	.
+;
+
+
+param:			demand	service_time:=
+MoscowDepot		0	0.2
+Ufa_LENTA		1014	0.2
+Ufa_ASHAN		80	0.2
+Ufa_OKEYe		37	0.2
+Ufa_OKEYk		15	0.2
+Ufa_OKEYmj		43	0.2
+Ufa_Magnit		3500	0.2;

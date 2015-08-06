@@ -1,0 +1,91 @@
+# Data VRPwTW
+
+set NODE :=	MoscowDepot NNovgorod_METROn NNovgorod_METROm NNovgorod_ASHANb NNovgorod_LENTA NNovgorod_ASHANm
+		NNovgorod_Okey NNovgorod_Magnit ;
+set VEHICLES:= 1;
+
+param L:= 2;
+param travel_cost = 75;
+param waiting_cost = 31;
+param working_limit = 8;
+
+
+param service_available:
+			1	2	3	4	5	6	7	8	9	10	11	12	13:=
+MoscowDepot		1	1	1	1	1	1	1	1	1	1	1	1	1
+NNovgorod_METROn	1	0	1	0	1	0	0	1	0	1	1	1	0
+NNovgorod_METROm	1	0	1	0	1	0	0	1	0	1	0	1	0
+NNovgorod_ASHANb	1	1	1	1	1	0	0	1	1	1	1	1	0
+NNovgorod_LENTA		1	1	1	1	1	0	0	1	1	1	1	1	0
+NNovgorod_ASHANm	0	1	1	1	0	0	0	0	1	1	1	0	0
+NNovgorod_Okey		0	1	1	1	0	0	0	0	1	1	1	0	0
+NNovgorod_Magnit	0	1	1	1	0	0	0	0	1	1	1	0	0
+;
+
+param timewind:=
+[MoscowDepot,*,*]:	  1	2	3	4	5	6	7	8	9	10	11	12	13:=
+	 1	0	24	48	72	96	120	144	168	192	216	240	264	288
+	 2	24	48	72	96	120	144	168	192	216	240	264	288	312
+
+[NNovgorod_METROn,*,*]:     	1	2	3	4	5	6	7	8	9	10	11	12	13:=
+       			1	7	31	55	79	103	127	151	175	199	223	247	271	295
+        		2	16	40	64	88	112	136	160	184	208	232	256	280	304
+[NNovgorod_METROm,*,*]:    	1	2	3	4	5	6	7	8	9	10	11	12	13:=
+        		1    	7	31	55	79	103	127	151	175	199	223	247	271	295
+        		2    	16	40	64	88	112	136	160	184	208	232	256	280	304
+[NNovgorod_ASHANb,*,*]:		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+         		1    	8	32	56	80	104	128	152	176	200	224	248	272	296
+       			2    	14	38	62	86	110	134	158	182	206	230	254	278	302
+[NNovgorod_LENTA,*,*]:		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+         		1    	8	32	56	80	104	128	152	176	200	224	248	272	296
+       			2    	14	38	62	86	110	134	158	182	206	230	254	278	302
+[NNovgorod_ASHANm,*,*]:		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+         		1    	8	32	56	80	104	128	152	176	200	224	248	272	296
+       			2    	14	38	62	86	110	134	158	182	206	230	254	278	302
+[NNovgorod_Okey,*,*]:		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+         		1    	8	32	56	80	104	128	152	176	200	224	248	272	296
+       			2    	13	37	61	85	109	133	157	181	205	229	253	277	301
+[NNovgorod_Magnit,*,*]:		1	2	3	4	5	6	7	8	9	10	11	12	13:=
+			1	7	31	55	79	103	127	151	175	199	223	247	271	295
+			2	16	40	64	88	112	136	160	184	208	232	256	280	304
+;
+
+set CUSTTIMEWINDOWS[MoscowDepot]:=              1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[NNovgorod_METROn]:=     	1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[NNovgorod_METROm]:=    	1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[NNovgorod_ASHANb]:=       	1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[NNovgorod_LENTA]:=		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[NNovgorod_ASHANm]:=		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[NNovgorod_Okey]:=		1	2	3	4	5	6	7	8	9	10	11	12	13;
+set CUSTTIMEWINDOWS[NNovgorod_Magnit]:=         1	2	3	4	5	6	7	8	9	10	11	12	13;
+
+
+param maxduration:=
+1 100;
+
+param capacity :=
+1 20000;
+
+param travel_time:
+
+	MoscowDepot	NNovgorod_METROn	NNovgorod_METROm	NNovgorod_ASHANb	NNovgorod_LENTA	NNovgorod_ASHANm	NNovgorod_Okey	NNovgorod_Magnit :=
+MoscowDepot	.	5.69	5.57	5.76	5.61	5.57	5.57	5.53
+NNovgorod_METROn	5.79	.	0.25	0.4	0.25	0.22	0.32	0.2
+NNovgorod_METROm	5.65	0.25	.	0.21	0.06	0.07	0.32	0.19
+NNovgorod_ASHANb	5.88	0.44	0.25	.	0.5	0.28	0.53	0.41
+NNovgorod_LENTA	5.68	0.24	0.05	0.2	.	0.08	0.33	0.21
+NNovgorod_ASHANm	5.6	0.19	0.09	0.65	0.5	.	0.29	0.16
+NNovgorod_Okey	5.66	0.35	0.34	0.5	0.35	0.3	.	0.19
+NNovgorod_Magnit	5.61	0.19	0.2	0.34	0.19	0.14	0.15	.;
+
+
+param:			demand	service_time:=
+MoscowDepot		0	0.2
+NNovgorod_METROn	65	0.2
+NNovgorod_METROm	54	0.2
+NNovgorod_ASHANb	238	0.2
+NNovgorod_LENTA		898	0.2
+NNovgorod_ASHANm	152	0.2
+NNovgorod_Okey		672	0.2
+NNovgorod_Magnit	4657	0.2
+;
